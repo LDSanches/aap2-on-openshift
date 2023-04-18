@@ -1,0 +1,19 @@
+---
+- name: Unassign gp2 as the default class
+  kubernetes.core.k8s:
+    state: present
+    force: yes
+    definition:
+      allowVolumeExpansion: true
+      apiVersion: storage.k8s.io/v1
+      kind: StorageClass
+      metadata:
+        annotations:
+          storageclass.kubernetes.io/is-default-class: "false"
+        name: gp2
+      parameters:
+        encrypted: "true"
+        type: gp2
+      provisioner: kubernetes.io/aws-ebs
+      reclaimPolicy: Delete
+      volumeBindingMode: WaitForFirstConsumer
