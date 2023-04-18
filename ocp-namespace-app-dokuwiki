@@ -1,8 +1,0 @@
----
-- name: Create namespace
-  kubernetes.core.k8s:
-    definition:
-      apiVersion: v1
-      kind: Namespace
-      metadata:
-        name: dokuwiki
