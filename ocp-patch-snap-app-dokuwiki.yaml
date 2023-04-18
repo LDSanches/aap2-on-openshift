@@ -1,0 +1,19 @@
+---
+- name: Patch application using Snapshot
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: my-release-dokuwiki
+        namespace: dokuwiki
+      spec:
+      ...
+        containers:
+          name: dokuwiki
+      ...
+        volumes: 
+        - name: dokuwiki-data
+          persistentVolumeClaim:
+            claimName:  pvc-restore
