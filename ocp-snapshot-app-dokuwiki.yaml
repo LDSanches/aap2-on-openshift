@@ -1,0 +1,14 @@
+---
+- name: Create VolumeSnapshot
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: snapshot.storage.k8s.io/v1
+      kind: VolumeSnapshot
+      metadata:
+        name: new-snapshot-test
+        namespace: dokuwiki
+      spec:
+        volumeSnapshotClassName: csi-aws-vsc
+        source:
+          persistentVolumeClaimName: dokuwiki-pvc
