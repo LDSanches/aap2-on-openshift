@@ -1,0 +1,16 @@
+---
+- name: Create PersistentVolumeClaim (PVC)
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: dokuwiki-pvc
+        namespace: dokuwiki
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+        storageClassname: gp2-csi
