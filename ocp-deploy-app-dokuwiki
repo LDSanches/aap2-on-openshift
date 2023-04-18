@@ -1,0 +1,14 @@
+---
+- name: Add bitnami repo
+  kubernetes.core.helm_repository:
+    name: bitnami
+    repo_url: ”https://charts.bitnami.com/bitnami”
+
+
+- name: Deploy dokuwiki within dokuwiki namespace
+  kubernetes.core.helm:
+    name: dokuwiki
+    chart_ref: bitnami/dokuwiki
+    release_namespace: dokuwiki
+    create_namespace: true
+    
