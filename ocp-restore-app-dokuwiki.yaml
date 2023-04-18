@@ -1,0 +1,21 @@
+---
+- name: Restore using Snapshot
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: pvc-restore
+        namespace: dokuwiki
+      spec:
+        dataSource:
+          name: new-snapshot-test
+          kind: VolumeSnapshot
+          apiGroup: snapshot.storage.k8s.io
+        storageClassName: gp2-csi
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
